@@ -289,3 +289,174 @@ function deleteComment(commentDiv) {
         }, 300);
     }
 }
+// Add this at the beginning of your main.js
+// Generate falling stars
+function createStars() {
+    const starsContainer = document.createElement('div');
+    starsContainer.className = 'stars';
+    document.body.appendChild(starsContainer);
+    
+    for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        // Random size between 1-3px
+        const size = Math.random() * 2 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        
+        // Random position
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        
+        // Random animation duration (5-15s) and delay (0-10s)
+        const duration = Math.random() * 10 + 5;
+        const delay = Math.random() * 10;
+        star.style.animationDuration = `${duration}s`;
+        star.style.animationDelay = `${delay}s`;
+        
+        starsContainer.appendChild(star);
+    }
+}
+
+// Scroll animation observer
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.setAttribute('data-scroll', 'in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    document.querySelectorAll('[data-scroll]').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Enhanced slider with 3D effects
+function initEnhancedSlider() {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach((slide, index) => {
+        if (index === 0) {
+            slide.classList.add('active');
+        }
+        
+        // Add parallax effect
+        slide.style.transformOrigin = `${Math.random() * 30 + 35}% ${Math.random() * 30 + 35}%`;
+    });
+}
+
+// Call these on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    createStars();
+    initScrollAnimations();
+    initEnhancedSlider();
+    
+    // Add data-scroll attribute to all sections
+    document.querySelectorAll('section').forEach((section, index) => {
+        section.setAttribute('data-scroll', '');
+        section.setAttribute('data-scroll-delay', index * 100);
+    });
+    
+    // Add scroll effects to cards
+    document.querySelectorAll('.anime-card').forEach((card, index) => {
+        card.setAttribute('data-scroll', '');
+        card.setAttribute('data-scroll-delay', index * 50 + 200);
+        card.setAttribute('data-scroll-duration', '700');
+        card.setAttribute('data-scroll-ease', 'cubic');
+    });
+    
+    // Enhanced modal show/hide
+    const modal = document.getElementById('animeModal');
+    modal.addEventListener('click', function(e) {
+        if (e.target === this || e.target.classList.contains('close-modal')) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 500);
+        }
+    });
+});
+
+// Update your openModal function
+function openModal(title, genre, description, rating) {
+    const modal = document.getElementById('animeModal');
+    const anime = animeData[title];
+    
+    if (!anime) {
+        console.error("Anime data not found:", title);
+        return;
+    }
+
+    // Update modal content
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalGenre').textContent = genre;
+    document.getElementById('modalDescription').textContent = description;
+    document.getElementById('modalRating').textContent = rating;
+    document.getElementById('modalPoster').style.backgroundImage = `url(${anime.imageUrl})`;
+    
+    const watchButton = document.querySelector('.watch-button');
+    watchButton.onclick = () => {
+        window.open(anime.streamingLink, '_blank');
+    };
+
+    // Show modal with animation
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+    document.body.style.overflow = 'hidden';
+}
+
+// Update your closeModal function
+function closeModal() {
+    const modal = document.getElementById('animeModal');
+    modal.classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 500);
+    document.body.style.overflow = 'auto';
+}
+
+// Update your slider functions
+function showSlide(index) {
+    const slides = document.querySelectorAll('.slide');
+    const slideWidth = slides[0].clientWidth;
+    const slideContainer = document.querySelector('.slides');
+    
+    if (index >= slides.length) currentSlide = 0;
+    else if (index < 0) currentSlide = slides.length - 1;
+    else currentSlide = index;
+
+    // Remove active class from all slides
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    // Add active class to current slide
+    slides[currentSlide].classList.add('active');
+    
+    // Apply 3D transform
+    slideContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    
+    // Apply parallax effect to adjacent slides
+    slides.forEach((slide, i) => {
+        const distance = Math.abs(i - currentSlide);
+        if (distance <= 2) {
+            const offset = (i - currentSlide) * 50;
+            const scale = 1 - (distance * 0.05);
+            const opacity = 1 - (distance * 0.3);
+            const rotate = (i - currentSlide) * 5;
+            
+            slide.style.transform = `translateX(${offset}px) scale(${scale}) rotateY(${rotate}deg)`;
+            slide.style.opacity = opacity;
+            slide.style.zIndex = 3 - distance;
+        } else {
+            slide.style.transform = 'translateX(0) scale(0.9) rotateY(10deg)';
+            slide.style.opacity = 0;
+            slide.style.zIndex = 0;
+        }
+    });
+} 
