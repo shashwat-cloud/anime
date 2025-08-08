@@ -169,7 +169,7 @@ body {
     transform: rotate(30deg);
 }
 
-/* Hero Section */ 
+/* Hero Section */
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/12/the-greatest-romance-anime-of-all-time-december-2024.jpg?q=70&fit=contain&w=1200&h=628&dpr=1') no-repeat center center/cover;
@@ -177,34 +177,33 @@ body {
     align-items: center;
     padding: 0 5%;
     margin-top: 70px;
-    animation: fadeIn 1.5s ease-in-out; 
-  
-} 
-.slider {  
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.slider {
     left: 55%;
     top: 16%;
     position: absolute;
-    width: 40vw;      /* Slider is 40% of viewport width */
-    height: 80vh;     /* Slider is 25% of viewport height */
+    width: 40vw;
+    height: 80vh;
     margin: 2vh auto;
     overflow: hidden;
     border-radius: 1vh;
-    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2); 
-    
-  }
-  
-  .slides {
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
+}
+
+.slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
-  }
-  
-  .slide {
+}
+
+.slide {
     min-width: 40vw;
     height: 80vh;
     object-fit: cover;
-  }
-  
-  .prev, .next {
+}
+
+.prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -216,11 +215,16 @@ body {
     cursor: pointer;
     border-radius: 50%;
     z-index: 1;
-  }
-  
-  .prev { left: 1vw; }
-  .next { right: 1vw; }
-  
+}
+
+.prev {
+    left: 1vw;
+}
+
+.next {
+    right: 1vw;
+}
+
 .hero-content {
     max-width: 600px;
 }
@@ -354,26 +358,11 @@ body {
     margin-right: 5px;
 }
 
-/* comment bae section */
-:root {
-    --primary-color: #ff4d4d;
-    --secondary-color: #ff9999;
-    --bg-color: #1a1a2e;
-    --text-color: #f1f1f1;
-    --card-bg: #16213e;
-    --nav-bg: #0f3460;
-    --search-bg: #2c3a5a;
-    --transition-speed: 0.3s;
-}
-
+/* Comment Section */
 .commentbar {
     padding: 80px 5%;
     background: linear-gradient(135deg, var(--nav-bg), var(--bg-color));
     text-align: center;
-    color: var(--text-color);
-}
-
-.section-title {
     color: var(--text-color);
 }
 
@@ -443,11 +432,6 @@ body {
     border-bottom: none;
 }
 
-.comment-author {
-    font-weight: bold;
-    color: var(--secondary-color);
-}
-
 .comment-text {
     margin: 10px 0;
     white-space: pre-wrap;
@@ -486,15 +470,12 @@ body {
     padding: 20px;
 }
 
-
-
-
 /* Signup Form */
 .signup-section {
     padding: 80px 5%;
     background-color: var(--bg-color);
     text-align: center;
-}  
+}
 
 .signup-form {
     max-width: 500px;
@@ -517,7 +498,8 @@ body {
     font-weight: 500;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid var(--search-bg);
@@ -528,7 +510,8 @@ body {
     transition: all var(--transition-speed);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.3);
     outline: none;
@@ -558,17 +541,19 @@ footer {
     background-color: var(--nav-bg);
     padding: 40px 5%;
     text-align: center;
-} 
+}
 
-footer h2{
-    color: white; 
-    animation: color 2s alternate infinite;
-} 
-@keyframes color{
-    to{
+footer h2 {
+    color: white;
+    animation: colorChange 2s alternate infinite;
+}
+
+@keyframes colorChange {
+    to {
         color: gold;
     }
 }
+
 .footer-links {
     display: flex;
     justify-content: center;
@@ -759,12 +744,6 @@ footer h2{
     to { width: 50%; }
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .navbar {
@@ -795,12 +774,62 @@ footer h2{
         font-size: 1rem;
     }
 
-    .plans {
-        flex-direction: column;
-        align-items: center;
+    .slider {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        height: 50vh;
+        margin: 20px 0;
+    }
+
+    .slide {
+        min-width: 100%;
+        height: 50vh;
+    }
+
+    .hero-content {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .comment-form textarea {
+        width: 100%;
     }
 
     .modal-content {
         width: 95%;
     }
+
+    .modal-anime-info {
+        flex-direction: column;
+    }
+
+    .modal-anime-poster {
+        min-height: 200px;
+    }
+}
+
+/* Additional Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--search-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 }
