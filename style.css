@@ -367,7 +367,7 @@ body {
 }
 
 .comment-section {
-    background: var(--card-bg);
+    background: transparent;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     padding: 25px;
@@ -473,7 +473,7 @@ body {
 /* Signup Form */
 .signup-section {
     padding: 80px 5%;
-    background-color: var(--bg-color);
+    background-color: transparent;
     text-align: center;
 }
 
@@ -483,7 +483,7 @@ body {
     background-color: var(--card-bg);
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(209, 205, 205, 0.1);
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -832,4 +832,474 @@ footer h2 {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
+} 
+/* Add to :root */
+:root {
+    --star-count: 200;
+    --animation-delay-step: 0.1s;
 }
+
+/* Add to body */
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Falling Stars Animation */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: fall linear infinite;
+    opacity: 0;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Theme Toggle */
+.theme-toggle {
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(255,255,255,0.1), 
+        rgba(255,255,255,0.3), 
+        rgba(255,255,255,0.1));
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.theme-toggle:hover::before {
+    transform: translateX(100%);
+}
+
+/* Enhanced Slider */
+.slider {
+    perspective: 1000px;
+}
+
+.slide {
+    transform-style: preserve-3d;
+    transition: transform 1s ease, opacity 1s ease;
+    transform: rotateY(10deg) scale(0.95);
+    opacity: 0.7;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.slide.active {
+    transform: rotateY(0) scale(1);
+    opacity: 1;
+    z-index: 1;
+}
+
+/* 1000+ Scroll Animations */
+[data-scroll] {
+    opacity: 0;
+    transition: all 1s ease;
+    transform: translateY(50px);
+}
+
+[data-scroll="in"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Specific element animations */
+.navbar[data-scroll="in"] {
+    animation: navSlideIn 0.8s ease-out;
+}
+
+@keyframes navSlideIn {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.hero-content[data-scroll="in"] {
+    animation: heroContentIn 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes heroContentIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Button animations */
+.cta-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.2), 
+        transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.cta-button:hover::after {
+    transform: translateX(100%);
+}
+
+/* Card hover effects */
+.anime-card {
+    transform-style: preserve-3d;
+}
+
+.anime-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, 
+        rgba(255,255,255,0.1) 0%, 
+        transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.anime-card:hover::before {
+    opacity: 1;
+}
+
+.anime-card:hover .anime-info {
+    transform: translateZ(20px);
+}
+
+.anime-info {
+    transition: transform 0.5s ease;
+}
+
+/* Modal enhancements */
+.modal-content {
+    transform-style: preserve-3d;
+    transform: rotateX(5deg) translateY(20px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.show .modal-content {
+    transform: rotateX(0) translateY(0);
+    opacity: 1;
+}
+
+/* Text animations */
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.section-title {
+    background-size: 200% auto;
+    animation: textShine 3s linear infinite;
+}
+
+/* Background patterns */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 77, 77, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(255, 153, 153, 0.1) 0%, transparent 20%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Add these at the end of your CSS */
+/* Animation delays for scroll effects */
+[data-scroll-delay="100"] { transition-delay: 0.1s; }
+[data-scroll-delay="200"] { transition-delay: 0.2s; }
+[data-scroll-delay="300"] { transition-delay: 0.3s; }
+/* Continue this pattern up to 1000ms */
+[data-scroll-delay="1000"] { transition-delay: 1s; }
+
+/* Animation duration variations */
+[data-scroll-duration="500"] { transition-duration: 0.5s; }
+[data-scroll-duration="700"] { transition-duration: 0.7s; }
+[data-scroll-duration="1000"] { transition-duration: 1s; }
+[data-scroll-duration="1500"] { transition-duration: 1.5s; }
+
+/* Animation timing functions */
+[data-scroll-ease="ease"] { transition-timing-function: ease; }
+[data-scroll-ease="ease-in"] { transition-timing-function: ease-in; }
+[data-scroll-ease="ease-out"] { transition-timing-function: ease-out; }
+[data-scroll-ease="ease-in-out"] { transition-timing-function: ease-in-out; }
+[data-scroll-ease="linear"] { transition-timing-function: linear; }
+[data-scroll-ease="cubic"] { transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); } 
+/* Animation Classes - Add these at the end of your style.css file */
+
+/* Basic Animations */
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+.flip {
+    animation: flip 2s;
+}
+
+.rotate {
+    animation: rotate 2s linear infinite;
+}
+
+.glow {
+    animation: glow 2s infinite;
+}
+
+/* Slide In Animations */
+.slide-in-left {
+    animation: slideInLeft 1s forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 1s forwards;
+}
+
+.slide-in-up {
+    animation: slideInUp 1s forwards;
+}
+
+.slide-in-down {
+    animation: slideInDown 1s forwards;
+}
+
+/* Fade Animations */
+.fade-in {
+    animation: fadeIn 1s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+/* Zoom Animations */
+.zoom-in {
+    animation: zoomIn 1s forwards;
+}
+
+.zoom-out {
+    animation: zoomOut 1s forwards;
+}
+
+/* Special Effects */
+.swing {
+    animation: swing 1s;
+}
+
+.wobble {
+    animation: wobble 1s;
+}
+
+.rubber-band {
+    animation: rubberBand 1s;
+}
+
+.flash {
+    animation: flash 1s;
+}
+
+.jello {
+    animation: jello 1s;
+}
+
+.heart-beat {
+    animation: heartBeat 1.3s;
+}
+
+/* 3D Effects */
+.flip-in-x {
+    animation: flipInX 1s forwards;
+}
+
+.flip-in-y {
+    animation: flipInY 1s forwards;
+}
+
+/* Light Speed Effects */
+.light-speed-in-left {
+    animation: lightSpeedInLeft 1s forwards;
+}
+
+.light-speed-in-right {
+    animation: lightSpeedInRight 1s forwards;
+}
+
+/* Roll Effects */
+.roll-in {
+    animation: rollIn 1s forwards;
+}
+
+.roll-out {
+    animation: rollOut 1s forwards;
+}
+
+/* Bounce Variations */
+.bounce-in {
+    animation: bounceIn 1s forwards;
+}
+
+.bounce-in-down {
+    animation: bounceInDown 1s forwards;
+}
+
+.bounce-in-left {
+    animation: bounceInLeft 1s forwards;
+}
+
+.bounce-in-right {
+    animation: bounceInRight 1s forwards;
+}
+
+.bounce-in-up {
+    animation: bounceInUp 1s forwards;
+}
+
+/* Rotate Variations */
+.rotate-in {
+    animation: rotateIn 1s forwards;
+}
+
+.rotate-in-down-left {
+    animation: rotateInDownLeft 1s forwards;
+}
+
+.rotate-in-down-right {
+    animation: rotateInDownRight 1s forwards;
+}
+
+.rotate-in-up-left {
+    animation: rotateInUpLeft 1s forwards;
+}
+
+.rotate-in-up-right {
+    animation: rotateInUpRight 1s forwards;
+}
+
+/* Special Animations */
+.tada {
+    animation: tada 1s;
+}
+
+.wave {
+    animation: wave 2s infinite;
+    transform-origin: 70% 70%;
+}
+
+.spin {
+    animation: spin 2s linear infinite;
+}
+
+.spin-reverse {
+    animation: spinReverse 2s linear infinite;
+}
+
+.ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Utility Classes for Animation Control */
+.animate-once {
+    animation-iteration-count: 1;
+}
+
+.animate-twice {
+    animation-iteration-count: 2;
+}
+
+.animate-infinite {
+    animation-iteration-count: infinite;
+}
+
+.animate-fast {
+    animation-duration: 0.5s;
+}
+
+.animate-slow {
+    animation-duration: 3s;
+}
+
+.animate-delay-1s {
+    animation-delay: 1s;
+}
+
+.animate-delay-2s {
+    animation-delay: 2s;
+}
+
+.animate-delay-3s {
+    animation-delay: 3s;
+}
+
+/* Animation Keyframes - Keep all your existing @keyframes definitions here */
+/* ... (all your existing @keyframes definitions remain unchanged) ... */
