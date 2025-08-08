@@ -6,7 +6,7 @@
     <title>AnimeFlix - Stream Your Favorite Anime</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
     <link rel="stylesheet" href="style.css">
-    =
+    
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -19,7 +19,8 @@
             <li><a href="#">Home</a></li>
             <li><a href="#anime">Anime</a></li>
             <li><a href="#comment">Comment</a></li>
-            <li><a href="#signup">Sign Up</a></li>
+            <li><a href="#signup">Sign Up</a></li> 
+            <li><a href="founder.html">Founders</a></li>
         </ul>
         <div class="search-container">
             <input type="text" placeholder="Search anime..." onkeypress="searchAnime()" id="input">
@@ -31,7 +32,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" data-scroll data-scroll-duration="1000">
             
         <div class="hero-content">
           <h2>
@@ -61,10 +62,10 @@
       </section>
 
     <!-- Anime Section -->
-    <section class="anime-section" id="anime">
+    <section class="anime-section"data-scroll data-scroll-duration="1000" id="anime">
         <h2 class="section-title">Popular Anime</h2>
         <div class="anime-grid">
-            <div class="anime-card" onclick="openModal('Demon Slayer', 'Action, Adventure, Fantasy', 'Tanjiro Kamado, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.', '9.5', 'https://via.placeholder.com/300x450')">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700" onclick="openModal('Demon Slayer', 'Action, Adventure, Fantasy', 'Tanjiro Kamado, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.', '9.5', 'https://via.placeholder.com/300x450')">
                 <img src="https://m.media-amazon.com/images/M/MV5BMWU1OGEwNmQtNGM3MS00YTYyLThmYmMtN2FjYzQzNzNmNTE0XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg" alt="Demon Slayer">
                 <div class="anime-info">
                     <h3>Demon Slayer</h3>
@@ -75,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-card" onclick="openModal('Attack on Titan', 'Action, Drama, Fantasy', 'Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called Titans, forcing humans to hide in fear behind enormous concentric walls.', '9.8', 'https://via.placeholder.com/300x450')">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('Attack on Titan', 'Action, Drama, Fantasy', 'Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called Titans, forcing humans to hide in fear behind enormous concentric walls.', '9.8', 'https://via.placeholder.com/300x450')">
                 <img src="https://m.media-amazon.com/images/M/MV5BZjliODY5MzQtMmViZC00MTZmLWFhMWMtMjMwM2I3OGY1MTRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Attack on Titan">
                 <div class="anime-info">
                     <h3>Attack on Titan</h3>
@@ -86,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-card" onclick="openModal('Jujutsu Kaisen', 'Action, Horror, Supernatural', 'Yuuji Itadori, a kind-hearted teenager, joins his school\'s Occult Club for fun, but discovers that its members are actual sorcerers who can manipulate the energy between beings for their own use.', '9.3', 'https://via.placeholder.com/300x450')">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('Jujutsu Kaisen', 'Action, Horror, Supernatural', 'Yuuji Itadori, a kind-hearted teenager, joins his school\'s Occult Club for fun, but discovers that its members are actual sorcerers who can manipulate the energy between beings for their own use.', '9.3', 'https://via.placeholder.com/300x450')">
                 <img src="https://image.api.playstation.com/vulcan/ap/rnd/202405/1410/3d2bdcf5f051000afab36061443803c061303bb2844d0e36.png?w=440">
                 <div class="anime-info">
                     <h3>Jujutsu Kaisen</h3>
@@ -97,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-card" onclick="openModal('Chainsaw Man', 'Action, Comedy, Superhero', 'In a world where people with superpowers (known as Quirks) are the norm, Izuku Midoriya dreams of becoming a hero despite being born without any powers,9.0,' )">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('Chainsaw Man', 'Action, Comedy, Superhero', 'In a world where people with superpowers (known as Quirks) are the norm, Izuku Midoriya dreams of becoming a hero despite being born without any powers,9.0,' )">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDP_12XNKq9fJLcuY3DaEnAFuQyiWELaa-OQ&s" alt="chain saw man">
                 <div class="anime-info">
                     <h3>chain saw man</h3>
@@ -108,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-card" onclick="openModal('One Piece', 'Action, Adventure, Comedy', 'Monkey D. Luffy wants to become the King of all pirates. Along his quest he meets several interesting characters and fights them to join his crew.', '9.7', 'https:/via.placeholder.com/300x450')">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('One Piece', 'Action, Adventure, Comedy', 'Monkey D. Luffy wants to become the King of all pirates. Along his quest he meets several interesting characters and fights them to join his crew.', '9.7', 'https:/via.placeholder.com/300x450')">
                 <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/08/one-piece-time-watch.jpg" alt="One Piece">
                 <div class="anime-info">
                     <h3>One Piece</h3>
@@ -119,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-card" onclick="openModal('Naruto Shippuden', 'Action, Adventure, Martial Arts', 'Naruto Uzumaki, is a loud, hyperactive, adolescent ninja who constantly searches for approval and recognition, as well as to become Hokage.', '9.2', 'https://via.placeholder.com/300x450')">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('Naruto Shippuden', 'Action, Adventure, Martial Arts', 'Naruto Uzumaki, is a loud, hyperactive, adolescent ninja who constantly searches for approval and recognition, as well as to become Hokage.', '9.2', 'https://via.placeholder.com/300x450')">
                 <img src="https://m.media-amazon.com/images/M/MV5BZTNjOWI0ZTAtOGY1OS00ZGU0LWEyOWYtMjhkYjdlYmVjMDk2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Naruto Shippuden">
                 <div class="anime-info">
                     <h3>Naruto Shippuden</h3>
@@ -130,7 +131,7 @@
                     </div>
                 </div>
             </div> 
-            <div class="anime-card" onclick="openModal('Death Note', 'Mystery, Supernatural, Thriller', 'A high school student gains a notebook that can kill anyone whose name is written in it.', '9.8', 'https:/via.placeholder.com/300x450')">
+            <div class="anime-card"data-scroll data-scroll-delay="100" data-scroll-duration="700" onclick="openModal('Death Note', 'Mystery, Supernatural, Thriller', 'A high school student gains a notebook that can kill anyone whose name is written in it.', '9.8', 'https:/via.placeholder.com/300x450')">
                 <img src="https://upload.wikimedia.org/wikipedia/en/6/6f/Death_Note_Vol_1.jpg" alt="Death Note">
                 <div class="anime-info">
                     <h3>Death Note</h3>
@@ -142,7 +143,7 @@
                 </div>
             </div>
             
-            <div class="anime-card" onclick="openModal('My Hero Academia', 'Action, Superhero, School', 'In a world where superpowers are the norm, Izuku Midoriya strives to be a hero.', '8.9', 'https:/via.placeholder.com/300x450')">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('My Hero Academia', 'Action, Superhero, School', 'In a world where superpowers are the norm, Izuku Midoriya strives to be a hero.', '8.9', 'https:/via.placeholder.com/300x450')">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0a67sDReWWOqs9qYY51wcJ07oL3fF17Ma44xYl3Ryly8UPftx72_Ck27CjcYI565dpwk&usqp=CAU" alt="My Hero Academia">
                 <div class="anime-info">
                     <h3>solo leveling</h3>
@@ -157,7 +158,7 @@
     </section>
 
     <!-- comment section -->
-    <section class="commentbar" id="comment">
+    <section class="commentbar"data-scroll data-scroll-duration="1000" id="comment">
         <h2 class="section-title">Write your views or suggestions</h2>
       
         <div class="comment-section">
@@ -178,7 +179,7 @@
       </section>
       
     <!-- Signup Form -->
-    <section class="signup-section" id="signup">
+    <section class="signup-section" data-scroll data-scroll-duration="1000" id="signup">
         <h2 class="section-title">Create Your Account</h2>
         <p>Join our community of anime lovers today</p>
         <form class="signup-form">
@@ -225,7 +226,7 @@
             <a href="#"><i class="fab fa-discord"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
-        <p class="copyright">© 2023 AnimeFlix. All rights reserved by <h2 class="proton"> Proton.programer//Mishra ji </h2></p>
+        <p class="copyright">© 2023 AnimeFlix. All rights reserved by <h2 class="proton"> Proton.programer// Shashwat Mishra ji </h2></p>
     </footer>
 
     <!-- Anime Modal -->
@@ -250,6 +251,7 @@
     <script src="main.js">
         
     </script> 
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script> 
+     
 </body>
 </html>
