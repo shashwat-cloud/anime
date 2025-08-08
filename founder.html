@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team - AnimeFlix</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
+  
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+    /* Falling Stars */
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: fall linear infinite;
+        opacity: 0;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-100vh) translateX(0) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) translateX(100px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    :root {
+        --primary-color: #ff4d4d;
+        --secondary-color: #ff9999;
+        --bg-color: #f6f0eb;
+        --text-color: #1a202c;
+        --card-bg: #ffffff;
+        --nav-bg: #0f3460;
+        --transition-speed: 0.3s;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0; 
+        position: relative;
+    }
+
+    /* Navbar */
+    .navbar {
+        background-color: var(--nav-bg);
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all var(--transition-speed);
+    }
+    .navbar:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+    .logo i {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-right: 10px;
+        transition: transform 0.5s ease;
+    }
+    .logo:hover i {
+        transform: rotate(360deg);
+    }
+    .logo h1 {
+        font-size: 1.8rem;
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 700;
+    }
+    .nav-links { 
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .nav-links li {
+        margin-left: 30px;
+        position: relative;
+    }
+    .nav-links a {
+        color: var(--card-bg);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: color var(--transition-speed);
+    }
+    .nav-links a:hover {
+        color: var(--primary-color);
+    }
+    .nav-links li::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-color);
+        transition: width var(--transition-speed);
+    }
+    .nav-links li:hover::after {
+        width: 100%;
+    }
+
+    /* Team Slider */
+    .team{
+        max-width: 500px;
+        margin: 120px auto 40px;
+        background: var(--bg-color);
+        border-radius: 25px;
+        padding: 30px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.15);
+        position: relative;
+        text-align: center;
+    }
+    .team h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--text-color);
+        margin-bottom: 10px;
+    }
+    .team p {
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    .slide {
+        display: none;
+        animation: fadeIn 0.8s ease-in-out;
+    }
+    .slide.active {
+        display: block;
+    }
+    .slide img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .slide h3 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .slide p {
+        font-size: 0.85rem;
+        color: gray;
+        margin-bottom: 10px;
+    }
+    .social {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+    .social a {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        transition: transform 0.3s;
+    }
+    .social a:hover {
+        transform: scale(1.2);
+    }
+    .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: white;
+        color: var(--primary-color);
+        border: none;
+        font-size: 1.5rem;
+        padding: 8px 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: background 0.3s;
+    }
+    .nav-btn:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+    .prev { left: -20px; }
+    .next { right: -20px; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+<body>
+
+<!-- Stars Container -->
+<div class="stars"></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-dragon"></i>
+        <h1>AnimeFlix</h1>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+    </ul>
+</nav>
+
+<!-- Team Slider -->
+<div class="team">
+    <h2>Our Team</h2>
+    <p>We strive to make your experience comfortable and productive.</p>
+
+    <div class="slide active">
+        <img src="shashawt2.jpg" alt="Edward Gilmore">
+        <h3>Shashwat Mishra</h3>
+        <p>Founder and CEO</p>
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="anant jha .jpg" alt="Lucy Kims">
+        <h3>Anant jha</h3>
+        <p> Experience Manager</p>
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="Screenshot 2025-08-09 012931.png" alt="Dan Wilson">
+        <h3> Punit rathi</h3>
+        <p>Senior Community Manager</p>
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <button class="nav-btn prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="nav-btn next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+    // Falling stars generator
+    function createStars() {
+        const starsContainer = document.querySelector('.stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            const size = Math.random() * 2 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            const duration = Math.random() * 10 + 5;
+            const delay = Math.random() * 10;
+            star.style.animationDuration = `${duration}s`;
+            star.style.animationDelay = `${delay}s`;
+            
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Slider logic
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    let autoSlide = setInterval(() => changeSlide(1), 5000);
+
+    function changeSlide(n) {
+        slides[slideIndex].classList.remove('active');
+        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        slides[slideIndex].classList.add('active');
+        resetAutoSlide();
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(() => changeSlide(1), 5000);
+    }
+
+    // Init
+ createStars()
+</script>
+
+</body>
+</html>
