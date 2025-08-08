@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix - Stream Your Favorite Anime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+    <link rel="stylesheet" href="style.css">
+    =
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-dragon"></i>
+            <h1>AnimeFlix</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#anime">Anime</a></li>
+            <li><a href="#comment">Comment</a></li>
+            <li><a href="#signup">Sign Up</a></li>
+        </ul>
+        <div class="search-container">
+            <input type="text" placeholder="Search anime..." onkeypress="searchAnime()" id="input">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <button class="theme-toggle" id="themeToggle" onclick="searchAnime()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+            
+        <div class="hero-content">
+          <h2>
+            <span id="typed-text"></span>
+          </h2>
+          <p>Watch your favorite anime anytime, anywhere. Thousands of episodes from classic to the latest releases, all in one place.</p>
+          <a href="#signup" class="cta-button">Start Watching Now</a>
+       <div>
+       <div class="slider">
+            <div class="slides">
+              <img src="https://m.media-amazon.com/images/S/pv-target-images/334f00b53cf3ef848ea7048b25711bc98e8236ce1685a096990c80d0965835ea.png" class="slide" alt="Image 1" />
+              <img src="https://wallpapers.com/images/hd/all-anime-one-piece-characters-dltnq47nfztq40m7.jpg" class="slide" alt="Image 2" />
+              <img src="https://assets-prd.ignimgs.com/2022/09/22/haikyuu-1663869063445.jpeg" class="slide" alt="Image 3" />
+              <img src="https://wallpapers.com/images/hd/anime-all-characters-hd-4q9fva9f4zdfe9md.jpg" class="slide" alt="Image 2" />
+              <img src="https://i.pinimg.com/736x/43/af/d0/43afd01dc42127c352f1fde070cc2be0.jpg" class="slide" alt="Image 3" />
+              <img src="https://www.pixelstalk.net/wp-content/uploads/images6/Anime-Wallpaper-4K-Desktop.jpg" class="slide" alt="Image 2" />
+              <img src="https://wallpapers.com/images/hd/anime-4k-pictures-decn8zerf477rc1a.jpg" class="slide" alt="Image 3" />
+              <img src="https://cdn.wallpapersafari.com/55/83/Pl6QHc.jpg" class="slide" alt="Image 2" />
+              <img src="https://img.buzzfeed.com/buzzfeed-static/static/2024-06/1/15/asset/bb36008c8025/sub-buzz-8947-1717257505-1.jpg" class="slide" alt="Image 3" />
+              <img src="https://c4.wallpaperflare.com/wallpaper/287/644/900/anime-4k-cool-for-desktop-wallpaper-preview.jpg" class="slide" alt="Image 2" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1nf1W7VULCSp751rP0AxpCPvOzoN9XKDO0Q&s" class="slide" alt="Image 3" />
+            </div>
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+          </div> 
+          
+      </section>
+
+    <!-- Anime Section -->
+    <section class="anime-section" id="anime">
+        <h2 class="section-title">Popular Anime</h2>
+        <div class="anime-grid">
+            <div class="anime-card" onclick="openModal('Demon Slayer', 'Action, Adventure, Fantasy', 'Tanjiro Kamado, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.', '9.5', 'https://via.placeholder.com/300x450')">
+                <img src="https://m.media-amazon.com/images/M/MV5BMWU1OGEwNmQtNGM3MS00YTYyLThmYmMtN2FjYzQzNzNmNTE0XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg" alt="Demon Slayer">
+                <div class="anime-info">
+                    <h3>Demon Slayer</h3>
+                    <p>Action, Adventure, Fantasy</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="anime-card" onclick="openModal('Attack on Titan', 'Action, Drama, Fantasy', 'Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called Titans, forcing humans to hide in fear behind enormous concentric walls.', '9.8', 'https://via.placeholder.com/300x450')">
+                <img src="https://m.media-amazon.com/images/M/MV5BZjliODY5MzQtMmViZC00MTZmLWFhMWMtMjMwM2I3OGY1MTRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Attack on Titan">
+                <div class="anime-info">
+                    <h3>Attack on Titan</h3>
+                    <p>Action, Drama, Fantasy</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.8</span>
+                    </div>
+                </div>
+            </div>
+            <div class="anime-card" onclick="openModal('Jujutsu Kaisen', 'Action, Horror, Supernatural', 'Yuuji Itadori, a kind-hearted teenager, joins his school\'s Occult Club for fun, but discovers that its members are actual sorcerers who can manipulate the energy between beings for their own use.', '9.3', 'https://via.placeholder.com/300x450')">
+                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202405/1410/3d2bdcf5f051000afab36061443803c061303bb2844d0e36.png?w=440">
+                <div class="anime-info">
+                    <h3>Jujutsu Kaisen</h3>
+                    <p>Action, Horror, Supernatural</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="anime-card" onclick="openModal('Chainsaw Man', 'Action, Comedy, Superhero', 'In a world where people with superpowers (known as Quirks) are the norm, Izuku Midoriya dreams of becoming a hero despite being born without any powers,9.0,' )">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDP_12XNKq9fJLcuY3DaEnAFuQyiWELaa-OQ&s" alt="chain saw man">
+                <div class="anime-info">
+                    <h3>chain saw man</h3>
+                    <p>Action, Comedy, Superhero</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="anime-card" onclick="openModal('One Piece', 'Action, Adventure, Comedy', 'Monkey D. Luffy wants to become the King of all pirates. Along his quest he meets several interesting characters and fights them to join his crew.', '9.7', 'https:/via.placeholder.com/300x450')">
+                <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/08/one-piece-time-watch.jpg" alt="One Piece">
+                <div class="anime-info">
+                    <h3>One Piece</h3>
+                    <p>Action, Adventure, Comedy</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.7</span>
+                    </div>
+                </div>
+            </div>
+            <div class="anime-card" onclick="openModal('Naruto Shippuden', 'Action, Adventure, Martial Arts', 'Naruto Uzumaki, is a loud, hyperactive, adolescent ninja who constantly searches for approval and recognition, as well as to become Hokage.', '9.2', 'https://via.placeholder.com/300x450')">
+                <img src="https://m.media-amazon.com/images/M/MV5BZTNjOWI0ZTAtOGY1OS00ZGU0LWEyOWYtMjhkYjdlYmVjMDk2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Naruto Shippuden">
+                <div class="anime-info">
+                    <h3>Naruto Shippuden</h3>
+                    <p>Action, Adventure, Martial Arts</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.2</span>
+                    </div>
+                </div>
+            </div> 
+            <div class="anime-card" onclick="openModal('Death Note', 'Mystery, Supernatural, Thriller', 'A high school student gains a notebook that can kill anyone whose name is written in it.', '9.8', 'https:/via.placeholder.com/300x450')">
+                <img src="https://upload.wikimedia.org/wikipedia/en/6/6f/Death_Note_Vol_1.jpg" alt="Death Note">
+                <div class="anime-info">
+                    <h3>Death Note</h3>
+                    <p>Mystery, Supernatural, Thriller</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.8</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="anime-card" onclick="openModal('My Hero Academia', 'Action, Superhero, School', 'In a world where superpowers are the norm, Izuku Midoriya strives to be a hero.', '8.9', 'https:/via.placeholder.com/300x450')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0a67sDReWWOqs9qYY51wcJ07oL3fF17Ma44xYl3Ryly8UPftx72_Ck27CjcYI565dpwk&usqp=CAU" alt="My Hero Academia">
+                <div class="anime-info">
+                    <h3>solo leveling</h3>
+                    <p>Action, Superhero, School</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.9</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- comment section -->
+    <section class="commentbar" id="comment">
+        <h2 class="section-title">Write your views or suggestions</h2>
+      
+        <div class="comment-section">
+          <h3>Leave a Comment</h3>
+      
+          <!-- Comment Form -->
+          <div class="comment-form">
+            <textarea id="commentText" placeholder="Share your thoughts..."></textarea>
+            <button id="submitComment" class="submit-btn">Post Comment</button>
+          </div>
+      
+          <!-- Comments List -->
+          <h3>Comments</h3>
+          <div id="commentsList" class="comments-list">
+            <div class="no-comments">No comments yet. Be the first to comment!</div>
+          </div>
+        </div>
+      </section>
+      
+    <!-- Signup Form -->
+    <section class="signup-section" id="signup">
+        <h2 class="section-title">Create Your Account</h2>
+        <p>Join our community of anime lovers today</p>
+        <form class="signup-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a password" required>
+            </div>
+            <div class="form-group">
+                <label for="plan">Select Plan</label>
+                <select id="plan" required>
+                    <option value="">Choose your plan</option>
+                    <option value="basic">Basic - $7.99/month</option>
+                    <option value="standard">Standard - $12.99/month</option>
+                    <option value="premium">Premium - $15.99/month</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-button">Start Your Free Trial</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#anime">Anime</a>
+            <a href="#subscription">Subscription</a>
+            <a href="#signup">Sign Up</a>
+            <a href="#">Help Center</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="copyright">© 2023 AnimeFlix. All rights reserved by <h2 class="proton"> Proton.programer//Mishra ji </h2></p>
+    </footer>
+
+    <!-- Anime Modal -->
+    <div class="modal" id="animeModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-anime-info">
+                <div class="modal-anime-poster" id="modalPoster"></div>
+                <div class="modal-anime-details">
+                    <h2 id="modalTitle">Demon Slayer</h2>
+                    <div class="meta">
+                        <span id="modalGenre">Action, Adventure, Fantasy</span>
+                        <span><i class="fas fa-star"></i> <span id="modalRating">9.5</span></span>
+                    </div>
+                    <p id="modalDescription">Tanjiro Kamado, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.</p>
+                    <button class="watch-button" >Watch Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js">
+        
+    </script> 
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</body>
+</html>

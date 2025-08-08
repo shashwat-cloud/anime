@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+    <style> 
+    .theme-toggle {
+        background: transparent;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.3rem;
+        cursor: pointer;
+        margin-left: 20px;
+        transition: transform 0.5s ease, color var(--transition-speed);
+    }
+
+    .theme-toggle:hover {
+        color: var(--primary-color);
+        transform: rotate(30deg);
+    }
+    :root {
+        --primary-color: #ff4d4d;
+        --secondary-color: #ff9999;
+        --bg-color: #1a1a2e;
+        --text-color: #f1f1f1;
+        --card-bg: #16213e;
+        --nav-bg: #0f3460;
+        --search-bg: #2c3a5a;
+        --transition-speed: 0.3s;
+    }
+
+    .light-mode {
+        --primary-color: #e63946;
+        --secondary-color: #ff758f;
+        --bg-color: #f8f9fa;
+        --text-color: #333333;
+        --card-bg: #ffffff;
+        --nav-bg: #343a40;
+        --search-bg: #e9ecef;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+        overflow-x: hidden;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+        background-color: var(--nav-bg);
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all var(--transition-speed);
+    }
+
+    .navbar:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .logo i {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-right: 10px;
+        transition: transform 0.5s ease;
+    }
+
+    .logo:hover i {
+        transform: rotate(360deg);
+    }
+
+    .logo h1 {
+        font-size: 1.8rem;
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 700;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
+
+    .nav-links li {
+        margin-left: 30px;
+        position: relative;
+    }
+
+    .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: color var(--transition-speed);
+    }
+
+    .nav-links a:hover {
+        color: var(--primary-color);
+    }
+
+    .nav-links li::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-color);
+        transition: width var(--transition-speed);
+    }
+
+    .nav-links li:hover::after {
+        width: 100%;
+    }
+
+    /* Video Section */
+    .video-container {
+        display: flex;
+        padding: 100px 5% 50px;
+        gap: 30px;
+    }
+
+    .main-video {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .video-sidebar {
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .video-player {
+        width: 100%;
+        aspect-ratio: 16/9;
+        background-color: #000;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-player video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .video-controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .control-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all var(--transition-speed);
+    }
+
+    .control-btn:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.1);
+    }
+
+    .video-info {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-info h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+
+    .video-info p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text-color);
+    }
+
+    .video-thumbnail {
+        display: flex;
+        gap: 15px;
+        padding: 10px;
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-thumbnail:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-thumbnail.active {
+        border: 2px solid var(--primary-color);
+    }
+
+    .thumbnail-image {
+        width: 120px;
+        height: 70px;
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    .thumbnail-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .thumbnail-info {
+        flex: 1;
+    }
+
+    .thumbnail-info h3 {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+
+    .thumbnail-info p {
+        font-size: 0.8rem;
+        color: var(--secondary-color);
+        opacity: 0.8;
+    }
+
+    @media (max-width: 992px) {
+        .video-container {
+            flex-direction: column;
+        }
+        
+        .video-sidebar {
+            width: 100%;
+        }
+    }
+ .episode-number {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-right: 8px;
+        }
+        
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .search-input {
+            width: 70%;
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: none;
+            background-color: var(--search-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: var(--search-bg);
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            width: 0%;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-top: 3px;
+            color: var(--secondary-color);
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix</title>
+</head>
+<body>
+   <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-dragon"></i>
+            <h1>AnimeFlix</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+    
+    <!-- Video Section -->
+    <div class="video-container">
+   <div class="video-container">
+        <div class="main-video">
+            <div class="video-player">
+                <video id="mainVideoPlayer" controls>
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            <div class="video-controls">
+                <button class="control-btn" onclick="playPause()">
+                    <i class="fas fa-play" id="playBtnIcon"></i>
+                </button>
+                <button class="control-btn" onclick="restartVideo()">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <button class="control-btn" onclick="toggleMute()">
+                    <i class="fas fa-volume-up" id="volumeBtnIcon"></i>
+                </button>
+                <button class="control-btn" onclick="toggleFullscreen()">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+            <div class="video-info" id="videoInfo">
+                <h2>Select an episode to start watching</h2>
+                <p></p>
+            </div>
+        </div>
+        
+        <div class="video-sidebar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search episodes..." id="searchInput" oninput="filterEpisodes()">
+            </div>
+            <div id="episodesContainer">
+                <!-- Episodes will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Anime data structure
+  const animeData = {
+  "Demon Slayer: Kimetsu no Yaiba": {
+    "episode1": {
+      title: "Cruelty",
+      videoUrl: "https://www.youtube.com/0f7b9d3b-4d79-4c06-a279-e9d333a54bdf",
+      thumbnailUrl: "https://i.ytimg.com/vi/VQGCKyvzIM4/maxresdefault.jpg",
+      description: "Tanjiro's family is slaughtered by a demon, and his sister Nezuko is turned into one.",
+      duration: "23:45",
+      episodeNumber: 1
+    },
+    "episode2": {
+      title: "Trainer Sakonji Urokodaki",
+      videoUrl: "https://www.youtube.com/embed/fH5WVD5Z_vQ",
+      thumbnailUrl: "https://i.ytimg.com/vi/fH5WVD5Z_vQ/maxresdefault.jpg",
+      description: "Tanjiro begins his training under Sakonji Urokodaki to become a Demon Slayer.",
+      duration: "23:30",
+      episodeNumber: 2
+    },
+    "episode3": {
+      title: "Sabito and Makomo",
+      videoUrl: "https://www.youtube.com/embed/2hZQ1lN2m9Q",
+      thumbnailUrl: "https://i.ytimg.com/vi/2hZQ1lN2m9Q/maxresdefault.jpg",
+      description: "Tanjiro meets two spirits who help him master his training.",
+      duration: "23:52",
+      episodeNumber: 3
+    },
+    "episode4": {
+      title: "Final Selection",
+      videoUrl: "https://www.youtube.com/embed/5Z7QvJYvZ8E",
+      thumbnailUrl: "https://i.ytimg.com/vi/5Z7QvJYvZ8E/maxresdefault.jpg",
+      description: "Tanjiro enters the Final Selection exam to become a Demon Slayer.",
+      duration: "24:15",
+      episodeNumber: 4
+    },
+    "episode5": {
+      title: "My Own Steel",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro receives his Demon Slayer uniform and sword.",
+      duration: "23:55",
+      episodeNumber: 5
+    },
+    "episode6": {
+      title: "Swordsman Accompanying a Demon",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro heads out on his first mission and confronts a demon.",
+      duration: "24:03",
+      episodeNumber: 6
+    },
+    "episode7": {
+      title: "Muzan Kibutsuji",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro meets the demon who killed his family: Muzan Kibutsuji.",
+      duration: "24:10",
+      episodeNumber: 7
+    },
+    "episode8": {
+      title: "The Smell of Enchanting Blood",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro meets Tamayo and Yushiro, allies in the fight against Muzan.",
+      duration: "23:40",
+      episodeNumber: 8
+    },
+    "episode9": {
+      title: "Temari Demon and Arrow Demon",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro fights two demons sent by Muzan in a deadly battle.",
+      duration: "24:00",
+      episodeNumber: 9
+    },
+    "episode10": {
+      title: "Together Forever",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro finishes the fight and sets out on his next mission.",
+      duration: "23:50",
+      episodeNumber: 10
+    },
+    "episode11": {
+      title: "Tsuzumi Mansion",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro enters a mysterious mansion filled with deadly demons.",
+      duration: "23:58",
+      episodeNumber: 11
+    },
+    "episode12": {
+      title: "The Boar Bares Its Fangs",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro meets Inosuke, a wild and aggressive fellow demon slayer.",
+      duration: "24:01",
+      episodeNumber: 12
+    },
+    "episode13": {
+      title: "Something More Important Than Life",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro defeats the demon in the mansion and learns about teamwork.",
+      duration: "23:57",
+      episodeNumber: 13
+    },
+    "episode14": {
+      title: "The House with the Wisteria Family Crest",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "The group rests and recovers at a house that helps demon slayers.",
+      duration: "23:50",
+      episodeNumber: 14
+    },
+    "episode15": {
+      title: "Mount Natagumo",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro receives a new mission and heads to a mountain haunted by demons.",
+      duration: "24:02",
+      episodeNumber: 15
+    },
+    "episode16": {
+      title: "Letting Someone Else Go First",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "The team faces a family of spider demons with terrifying power.",
+      duration: "23:49",
+      episodeNumber: 16
+    },
+    "episode17": {
+      title: "You Must Master a Single Thing",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Zenitsu confronts a spider demon using his unique lightning breathing technique.",
+      duration: "24:06",
+      episodeNumber: 17
+    },
+    "episode18": {
+      title: "A Forged Bond",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro and Inosuke continue fighting the powerful spider demon family.",
+      duration: "23:53",
+      episodeNumber: 18
+    },
+    "episode19": {
+      title: "Hinokami",
+      videoUrl: "https://www.youtube.com/embed/Xg0l7V8l5c4",
+      thumbnailUrl: "https://i.ytimg.com/vi/Xg0l7V8l5c4/maxresdefault.jpg",
+      description: "Tanjiro awakens a new power during a desperate battle.",
+      duration: "24:10",
+      episodeNumber: 19
+    },
+    "episode20": {
+      title: "Pretend Family",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "The battle with the spider demon Rui intensifies as the Hashira intervene.",
+      duration: "23:59",
+      episodeNumber: 20
+    },
+    "episode21": {
+      title: "Against Corps Rules",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro and Nezuko are taken to the Demon Slayer Corps headquarters.",
+      duration: "23:44",
+      episodeNumber: 21
+    },
+    "episode22": {
+      title: "Master of the Mansion",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "The Master of the Demon Slayer Corps meets Tanjiro and Nezuko.",
+      duration: "24:01",
+      episodeNumber: 22
+    },
+    "episode23": {
+      title: "Hashira Meeting",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "The Hashira debate what to do with Nezuko and Tanjiro.",
+      duration: "23:56",
+      episodeNumber: 23
+    },
+    "episode24": {
+      title: "Rehabilitation Training",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "The team undergoes intensive recovery training.",
+      duration: "23:50",
+      episodeNumber: 24
+    },
+    "episode25": {
+      title: "Tsuguko, Kanao Tsuyuri",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "Tanjiro meets Kanao, a skilled swordswoman and trainee.",
+      duration: "23:58",
+      episodeNumber: 25
+    },
+    "episode26": {
+      title: "New Mission",
+      videoUrl: "https://www.youtube.com/embed/8nCDdIAv4vA",
+      thumbnailUrl: "https://i.ytimg.com/vi/8nCDdIAv4vA/maxresdefault.jpg",
+      description: "The team receives a new mission aboard the Infinity Train.",
+      duration: "24:05",
+      episodeNumber: 26
+    }
+  }
+};
+
+        // DOM elements
+        const mainVideo = document.getElementById('mainVideoPlayer');
+        const episodesContainer = document.getElementById('episodesContainer');
+        const videoInfo = document.getElementById('videoInfo');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeDisplay = document.getElementById('currentTime');
+        const durationDisplay = document.getElementById('duration');
+        const searchInput = document.getElementById('searchInput');
+
+        // Theme toggle (existing code)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        let isDarkMode = true;
+
+        themeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) { 
+                document.body.classList.remove('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun'); 
+            }
+        });
+
+        // Load episodes when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            loadEpisodes('Demon Slayer: Kimetsu no Yaiba');
+            
+            // Set up video event listeners
+            mainVideo.addEventListener('timeupdate', updateProgressBar);
+            mainVideo.addEventListener('loadedmetadata', () => {
+                durationDisplay.textContent = formatTime(mainVideo.duration);
+            });
+            mainVideo.addEventListener('ended', () => {
+                document.getElementById('playBtnIcon').className = 'fas fa-play';
+            });
+        });
+
+        // Load episodes for a specific anime
+        function loadEpisodes(animeTitle) {
+            episodesContainer.innerHTML = '';
+            const episodes = animeData[animeTitle];
+            
+            for (const [key, episode] of Object.entries(episodes)) {
+                const episodeElement = document.createElement('div');
+                episodeElement.className = 'video-thumbnail';
+                episodeElement.innerHTML = `
+                    <div class="thumbnail-image">
+                        <img src="${episode.thumbnailUrl}" alt="${episode.title}">
+                    </div>
+                    <div class="thumbnail-info">
+                        <h3><span class="episode-number">Ep ${episode.episodeNumber}</span>${episode.title}</h3>
+                        <p>${episode.duration}</p>
+                    </div>
+                `;
+                
+                episodeElement.addEventListener('click', () => {
+                    changeVideo(episode.videoUrl, `${animeTitle}: ${episode.title}`, episode.description);
+                });
+                
+                episodesContainer.appendChild(episodeElement);
+            }
+            
+            // Activate first episode by default
+            if (episodesContainer.firstChild) {
+                episodesContainer.firstChild.click();
+            }
+        }
+
+        // Change video function
+        function changeVideo(videoSrc, title, description) {
+            // Update main video
+            mainVideo.src = videoSrc;
+            mainVideo.load();
+            mainVideo.play();
+            
+            // Update video info
+            videoInfo.querySelector('h2').textContent = title;
+            videoInfo.querySelector('p').textContent = description;
+            
+            // Update active state
+            const thumbnails = document.querySelectorAll('.video-thumbnail');
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // Update play button
+            document.getElementById('playBtnIcon').className = 'fas fa-pause';
+        }
+
+        // Video control functions
+        function playPause() {
+            const playBtnIcon = document.getElementById('playBtnIcon');
+            if (mainVideo.paused) {
+                mainVideo.play();
+                playBtnIcon.className = 'fas fa-pause';
+            } else {
+                mainVideo.pause();
+                playBtnIcon.className = 'fas fa-play';
+            }
+        }
+
+        function restartVideo() {
+            mainVideo.currentTime = 0;
+            mainVideo.play();
+            document.getElementById('playBtnIcon').className = 'fas fa-pause';
+        }
+
+        function toggleMute() {
+            const volumeBtnIcon = document.getElementById('volumeBtnIcon');
+            mainVideo.muted = !mainVideo.muted;
+            volumeBtnIcon.className = mainVideo.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.querySelector('.video-player').requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Progress bar functions
+        function updateProgressBar() {
+            const progress = (mainVideo.currentTime / mainVideo.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentTimeDisplay.textContent = formatTime(mainVideo.currentTime);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Search function
+        function filterEpisodes() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const thumbnails = document.querySelectorAll('.video-thumbnail');
+            
+            thumbnails.forEach(thumbnail => {
+                const title = thumbnail.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    thumbnail.style.display = 'flex';
+                } else {
+                    thumbnail.style.display = 'none';
+                }
+            });
+        }
+
+        // Click on progress bar to seek
+        progressBar.parentElement.addEventListener('click', (e) => {
+            const pos = (e.pageX - progressBar.parentElement.offsetLeft) / progressBar.parentElement.offsetWidth;
+            mainVideo.currentTime = pos * mainVideo.duration;
+        });
+    </script>
+</body>
+</html>
