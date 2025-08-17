@@ -1,175 +1,381 @@
 :root {
-    --primary-color: #ff4d4d;
-    --secondary-color: #ff9999;
-    --bg-color: #1a1a2e;
-    --text-color: #f1f1f1;
-    --card-bg: #16213e;
-    --nav-bg: #0f3460;
-    --search-bg: #2c3a5a;
-    --transition-speed: 0.3s;
+  --primary-color: #ff4d4d;
+  --secondary-color: #ff9999;
+  --bg-color: #0d1117;
+  --text-color: #f1f1f1;
+  --nav-bg: rgba(15, 52, 96, 0.85);
+  --transition: 0.35s;
+  --transition-speed: 0.35s;
+  --sidebar-w: 260px;
+  --blur: 12px;
+  --card-bg: #1e1e1e;
+  --star-count: 200;
+  --animation-delay-step: 0.1s;
+  --search-bg: #23272f; /* Added missing variable */
 }
 
 .light-mode {
-    --primary-color: #e63946;
-    --secondary-color: #ff758f;
-    --bg-color: #f8f9fa;
-    --text-color: #050505;
-    --card-bg: #ffffff;
-    --nav-bg: #343a40;
-    --search-bg: #e9ecef;
+  --bg-color: #f9f9f9;
+  --text-color: #1a1a1a;
+  --nav-bg: rgba(230, 230, 230, 0.9);
+  --card-bg: #ffffff;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
+/* Global */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-    overflow-x: hidden;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background var(--transition), color var(--transition);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Navigation Bar */
-.navbar {
-    background-color: var(--nav-bg);
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all var(--transition-speed);
+/* Menu Button */
+.menu-btn {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: none;
+  background: var(--nav-bg);
+  backdrop-filter: blur(var(--blur));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1101;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.3s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.menu-btn:active { transform: scale(0.9); }
+.menu-btn i {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  transition: transform 0.3s ease;
 }
 
-.navbar:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--nav-bg);
+  backdrop-filter: blur(var(--blur));
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1100;
+  transform: translateX(-100%);
+  transition: transform var(--transition) ease-in-out;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.4);
 }
+.sidebar.open { transform: translateX(0); }
 
+/* Logo */
 .logo {
-    display: flex;
-    align-items: center;
-    animation: fadeIn 1s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-
 .logo i {
-    color: var(--primary-color);
-    font-size: 2rem;
-    margin-right: 10px;
-    transition: transform 0.5s ease;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  animation: pulse 2s infinite;
 }
-
-.logo:hover i {
-    transform: rotate(360deg);
-}
-
 .logo h1 {
-    font-size: 1.8rem;
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+/* Nav Links */
 .nav-links {
-    display: flex;
-    list-style: none;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
 }
-
-.nav-links li {
-    margin-left: 30px;
-    position: relative;
-}
-
 .nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
-    transition: color var(--transition-speed);
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
-
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+.nav-links a:hover::before { left: 0; }
 .nav-links a:hover {
-    color: var(--primary-color);
+  color: #fff;
+  transform: translateX(5px);
 }
 
-.nav-links li::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width var(--transition-speed);
+/* Sidebar bottom actions */
+.sidebar-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
+.theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.theme-toggle:hover {
+  color: var(--primary-color);
+  transform: rotate(20deg);
+}
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.theme-toggle:hover::before { transform: translateX(100%); }
 
-.nav-links li:hover::after {
-    width: 100%;
+/* Animations */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 /* Search Bar */
 .search-container {
-    display: flex;
-    align-items: center;
-    background-color: var(--search-bg);
-    border-radius: 30px;
-    padding: 8px 15px;
-    transition: all var(--transition-speed);
-    width: 250px;
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 6px 10px;
+  gap: 8px;
 }
-
-.search-container:focus-within {
-    box-shadow: 0 0 0 2px var(--primary-color);
-    width: 300px;
-}
-
 .search-container input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text-color);
-    width: 100%;
-    padding: 5px 10px;
-    font-size: 1rem;
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-size: 0.95rem;
 }
-
 .search-container button {
-    background: transparent;
-    border: none;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: color var(--transition-speed);
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.search-container button:hover { color: var(--primary-color); }
+
+/* Slider */
+.slider {
+  position: relative;
+  perspective: 1000px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 1vh;
+  box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
+}
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+.slide {
+  min-width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  transform-style: preserve-3d;
+  transition: transform 1s ease, opacity 1s ease;
+  transform: rotateY(10deg) scale(0.95);
+  opacity: 0.7;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.slide.active {
+  transform: rotateY(0) scale(1);
+  opacity: 1;
+  z-index: 1;
 }
 
-.search-container button:hover {
-    color: var(--primary-color);
+/* Falling Stars */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: fall linear infinite;
+  opacity: 0;
+}
+@keyframes fall {
+  0% { transform: translateY(-100vh) translateX(0) rotate(0deg); opacity: 0; }
+  10%,90% { opacity: 1; }
+  100% { transform: translateY(100vh) translateX(100px) rotate(360deg); opacity: 0; }
 }
 
-/* Theme Toggle */
-.theme-toggle {
-    background: transparent;
-    border: none;
-    color: var(--text-color);
-    font-size: 1.3rem;
-    cursor: pointer;
-    margin-left: 20px;
-    transition: transform 0.5s ease, color var(--transition-speed);
-}
 
-.theme-toggle:hover {
-    color: var(--primary-color);
-    transform: rotate(30deg);
+.anime-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
+.anime-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+.anime-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.anime-card:hover img { transform: scale(1.05); }
+.anime-info {
+  padding: 15px;
+  transition: transform 0.5s ease;
+}
+.anime-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.anime-info p {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  color: #ffc107;
+}
+.rating i { margin-right: 5px; }
 
-/* Hero Section */
+/* Comments */
+.commentbar {
+  padding: 80px 5%;
+  background: linear-gradient(135deg, var(--nav-bg), var(--bg-color));
+  text-align: center;
+  color: var(--text-color);
+}
+.comment-section {
+  background: transparent;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 25px;
+  margin-top: 30px;
+  color: var(--text-color);
+}
+.comment-form textarea {
+  width: 60%;
+  padding: 12px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  font-size: 14px;
+  margin-bottom: 10px;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+.comment-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+.submit-btn {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+.submit-btn:hover { background-color: var(--secondary-color); }
+.comments-list { margin-top: 20px; text-align: left; }
+.comment { border-bottom: 1px solid var(--secondary-color); padding: 15px 0; }
+.comment:last-child { border-bottom: none; }
+
+/* Footer */
+footer {
+  background-color: var(--nav-bg);
+  padding: 40px 5%;
+  text-align: center;
+}
+footer h2 { color: white; animation: colorChange 2s alternate infinite; }
+@keyframes colorChange { to { color: gold; } }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+.footer-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--primary-color); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--secondary-color); } 
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/12/the-greatest-romance-anime-of-all-time-december-2024.jpg?q=70&fit=contain&w=1200&h=628&dpr=1') no-repeat center center/cover;
@@ -831,17 +1037,7 @@ footer h2 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
-} 
-/* Add to :root */
-:root {
-    --star-count: 200;
-    --animation-delay-step: 0.1s;
-}
-
-/* Add to body */
-body {
-    overflow-x: hidden;
+/* Removed duplicate :root and body blocks */
     position: relative;
 }
 
@@ -1079,227 +1275,11 @@ body::after {
 [data-scroll-duration="1000"] { transition-duration: 1s; }
 [data-scroll-duration="1500"] { transition-duration: 1.5s; }
 
-/* Animation timing functions */
+/* Animation timing functions */ 
 [data-scroll-ease="ease"] { transition-timing-function: ease; }
 [data-scroll-ease="ease-in"] { transition-timing-function: ease-in; }
 [data-scroll-ease="ease-out"] { transition-timing-function: ease-out; }
 [data-scroll-ease="ease-in-out"] { transition-timing-function: ease-in-out; }
 [data-scroll-ease="linear"] { transition-timing-function: linear; }
 [data-scroll-ease="cubic"] { transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); } 
-/* Animation Classes - Add these at the end of your style.css file */
 
-/* Basic Animations */
-.float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.bounce {
-    animation: bounce 2s infinite;
-}
-
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-.shake {
-    animation: shake 0.5s;
-}
-
-.flip {
-    animation: flip 2s;
-}
-
-.rotate {
-    animation: rotate 2s linear infinite;
-}
-
-.glow {
-    animation: glow 2s infinite;
-}
-
-/* Slide In Animations */
-.slide-in-left {
-    animation: slideInLeft 1s forwards;
-}
-
-.slide-in-right {
-    animation: slideInRight 1s forwards;
-}
-
-.slide-in-up {
-    animation: slideInUp 1s forwards;
-}
-
-.slide-in-down {
-    animation: slideInDown 1s forwards;
-}
-
-/* Fade Animations */
-.fade-in {
-    animation: fadeIn 1s forwards;
-}
-
-.fade-out {
-    animation: fadeOut 1s forwards;
-}
-
-/* Zoom Animations */
-.zoom-in {
-    animation: zoomIn 1s forwards;
-}
-
-.zoom-out {
-    animation: zoomOut 1s forwards;
-}
-
-/* Special Effects */
-.swing {
-    animation: swing 1s;
-}
-
-.wobble {
-    animation: wobble 1s;
-}
-
-.rubber-band {
-    animation: rubberBand 1s;
-}
-
-.flash {
-    animation: flash 1s;
-}
-
-.jello {
-    animation: jello 1s;
-}
-
-.heart-beat {
-    animation: heartBeat 1.3s;
-}
-
-/* 3D Effects */
-.flip-in-x {
-    animation: flipInX 1s forwards;
-}
-
-.flip-in-y {
-    animation: flipInY 1s forwards;
-}
-
-/* Light Speed Effects */
-.light-speed-in-left {
-    animation: lightSpeedInLeft 1s forwards;
-}
-
-.light-speed-in-right {
-    animation: lightSpeedInRight 1s forwards;
-}
-
-/* Roll Effects */
-.roll-in {
-    animation: rollIn 1s forwards;
-}
-
-.roll-out {
-    animation: rollOut 1s forwards;
-}
-
-/* Bounce Variations */
-.bounce-in {
-    animation: bounceIn 1s forwards;
-}
-
-.bounce-in-down {
-    animation: bounceInDown 1s forwards;
-}
-
-.bounce-in-left {
-    animation: bounceInLeft 1s forwards;
-}
-
-.bounce-in-right {
-    animation: bounceInRight 1s forwards;
-}
-
-.bounce-in-up {
-    animation: bounceInUp 1s forwards;
-}
-
-/* Rotate Variations */
-.rotate-in {
-    animation: rotateIn 1s forwards;
-}
-
-.rotate-in-down-left {
-    animation: rotateInDownLeft 1s forwards;
-}
-
-.rotate-in-down-right {
-    animation: rotateInDownRight 1s forwards;
-}
-
-.rotate-in-up-left {
-    animation: rotateInUpLeft 1s forwards;
-}
-
-.rotate-in-up-right {
-    animation: rotateInUpRight 1s forwards;
-}
-
-/* Special Animations */
-.tada {
-    animation: tada 1s;
-}
-
-.wave {
-    animation: wave 2s infinite;
-    transform-origin: 70% 70%;
-}
-
-.spin {
-    animation: spin 2s linear infinite;
-}
-
-.spin-reverse {
-    animation: spinReverse 2s linear infinite;
-}
-
-.ping {
-    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* Utility Classes for Animation Control */
-.animate-once {
-    animation-iteration-count: 1;
-}
-
-.animate-twice {
-    animation-iteration-count: 2;
-}
-
-.animate-infinite {
-    animation-iteration-count: infinite;
-}
-
-.animate-fast {
-    animation-duration: 0.5s;
-}
-
-.animate-slow {
-    animation-duration: 3s;
-}
-
-.animate-delay-1s {
-    animation-delay: 1s;
-}
-
-.animate-delay-2s {
-    animation-delay: 2s;
-}
-
-.animate-delay-3s {
-    animation-delay: 3s;
-}
-
-/* Animation Keyframes - Keep all your existing @keyframes definitions here */
-/* ... (all your existing @keyframes definitions remain unchanged) ... */
