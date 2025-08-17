@@ -1,51 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="google-adsense-account" content="ca-pub-1135975773569228">
-    <title>AnimeFlix - Stream Your Favorite Anime</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
-    <link rel="stylesheet" href="style.css">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1135975773569228"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sliding Nav Demo</title>
+  <!-- Font Awesome --> 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1135975773569228"
      crossorigin="anonymous"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1135975773569228"
      crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fas fa-dragon"></i>
-            <h1>AnimeFlix</h1>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#anime">Anime</a></li>
-            <li><a href="#comment">Comment</a></li>
-            <li><a href="#signup">Sign Up</a></li> 
-            <li><a href="founder.html">Founders</a></li>
-        </ul>
-        <div class="search-container">
-            <input type="text" placeholder="Search anime..." onkeypress="searchAnime()" id="input">
-            <button><i class="fas fa-search"></i></button>
-        </div>
-        <button class="theme-toggle" id="themeToggle" onclick="searchAnime()">
-            <i class="fas fa-moon"></i>
-        </button>
-    </nav>
+  <!-- Menu Button -->
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">
+    <i class="fa-solid fa-bars"></i>
+  </button> 
+  
 
-    <!-- Hero Section -->
-    <section class="hero" data-scroll data-scroll-duration="1000">
+  <!-- Sidebar Nav -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <i class="fa-solid fa-dragon"></i>
+      <h1>AnimeFlix</h1>
+    </div>
+
+    <!-- ✅ Search Bar -->
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search anime...">
+      <button onclick="searchAnime()"><i class="fa-solid fa-search"></i></button>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Anime</a></li>
+      <li><a href="#">Comment</a></li>
+      <li><a href="#">Sign Up</a></li>
+      <li><a href="#">Founders</a></li>
+    </ul>
+
+    <div class="sidebar-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+  </aside>
+ <!-- Hero Section -->
+    <section class="hero" id="hero">
             
         <div class="hero-content">
           <h2>
             <span id="typed-text"></span>
           </h2>
           <p>Watch your favorite anime anytime, anywhere. Thousands of episodes from classic to the latest releases, all in one place.</p>
-          <a href="#signup" class="cta-button">Start Watching Now</a>
-       <div>
-       <div class="slider">
-            <div class="slides">
+      <a href="#signup" class="cta-button">Start Watching Now</a>
+    </div>
+    <div class="slider">
+        <div class="slides">
               <img src="https://m.media-amazon.com/images/S/pv-target-images/334f00b53cf3ef848ea7048b25711bc98e8236ce1685a096990c80d0965835ea.png" class="slide" alt="Image 1" />
               <img src="https://wallpapers.com/images/hd/all-anime-one-piece-characters-dltnq47nfztq40m7.jpg" class="slide" alt="Image 2" />
               <img src="https://assets-prd.ignimgs.com/2022/09/22/haikyuu-1663869063445.jpeg" class="slide" alt="Image 3" />
@@ -65,7 +77,7 @@
       </section>
 
     <!-- Anime Section -->
-    <section class="anime-section"data-scroll data-scroll-duration="1000" id="anime">
+    <section class="anime-section" id="anime">
         <h2 class="section-title">Popular Anime</h2>
         <div class="anime-grid">
             <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700" onclick="openModal('Demon Slayer', 'Action, Adventure, Fantasy', 'Tanjiro Kamado, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.', '9.5', 'https://via.placeholder.com/300x450')">
@@ -101,10 +113,10 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('Chainsaw Man', 'Action, Comedy, Superhero', 'In a world where people with superpowers (known as Quirks) are the norm, Izuku Midoriya dreams of becoming a hero despite being born without any powers,9.0,' )">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDP_12XNKq9fJLcuY3DaEnAFuQyiWELaa-OQ&s" alt="chain saw man">
+            <div class="anime-card"  onclick="openModal('Chainsaw Man', 'Action, Comedy, Superhero', 'Denji, a young man with a debt-ridden life, becomes Chainsaw Man after merging with his pet devil Pochita.', '9.0', 'https://via.placeholder.com/300x450')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDP_12XNKq9fJLcuY3DaEnAFuQyiWELaa-OQ&s" alt="Chainsaw Man">
                 <div class="anime-info">
-                    <h3>chain saw man</h3>
+                    <h3>Chainsaw Man</h3>
                     <p>Action, Comedy, Superhero</p>
                     <div class="rating">
                         <i class="fas fa-star"></i>
@@ -112,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('One Piece', 'Action, Adventure, Comedy', 'Monkey D. Luffy wants to become the King of all pirates. Along his quest he meets several interesting characters and fights them to join his crew.', '9.7', 'https:/via.placeholder.com/300x450')">
+            <div class="anime-card" onclick="openModal('One Piece', 'Action, Adventure, Comedy', 'Monkey D. Luffy wants to become the King of all pirates. Along his quest he meets several interesting characters and fights them to join his crew.', '9.7', 'https://via.placeholder.com/300x450')">
                 <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/08/one-piece-time-watch.jpg" alt="One Piece">
                 <div class="anime-info">
                     <h3>One Piece</h3>
@@ -134,7 +146,7 @@
                     </div>
                 </div>
             </div> 
-            <div class="anime-card"data-scroll data-scroll-delay="100" data-scroll-duration="700" onclick="openModal('Death Note', 'Mystery, Supernatural, Thriller', 'A high school student gains a notebook that can kill anyone whose name is written in it.', '9.8', 'https:/via.placeholder.com/300x450')">
+            <div class="anime-card"data-scroll data-scroll-delay="100" data-scroll-duration="700" onclick="openModal('Death Note', 'Mystery, Supernatural, Thriller', 'A high school student gains a notebook that can kill anyone whose name is written in it.', '9.8', 'https://via.placeholder.com/300x450')">
                 <img src="https://upload.wikimedia.org/wikipedia/en/6/6f/Death_Note_Vol_1.jpg" alt="Death Note">
                 <div class="anime-info">
                     <h3>Death Note</h3>
@@ -146,10 +158,10 @@
                 </div>
             </div>
             
-            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('My Hero Academia', 'Action, Superhero, School', 'In a world where superpowers are the norm, Izuku Midoriya strives to be a hero.', '8.9', 'https:/via.placeholder.com/300x450')">
+            <div class="anime-card" data-scroll data-scroll-delay="100" data-scroll-duration="700"onclick="openModal('My Hero Academia', 'Action, Superhero, School', 'In a world where superpowers are the norm, Izuku Midoriya strives to be a hero.', '8.9', 'https://via.placeholder.com/300x450')">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0a67sDReWWOqs9qYY51wcJ07oL3fF17Ma44xYl3Ryly8UPftx72_Ck27CjcYI565dpwk&usqp=CAU" alt="My Hero Academia">
                 <div class="anime-info">
-                    <h3>solo leveling</h3>
+                    <h3>My Hero Academia</h3>
                     <p>Action, Superhero, School</p>
                     <div class="rating">
                         <i class="fas fa-star"></i>
@@ -229,7 +241,7 @@
             <a href="#"><i class="fab fa-discord"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
-        <p class="copyright">© 2023 AnimeFlix. All rights reserved by <h2 class="proton"> Proton.programer// tom and jerry </h2></p>
+        <p class="copyright">© 2023 AnimeFlix. All rights reserved by <span class="proton">Proton.programer// tom and jerry</span></p>
     </footer>
 
     <!-- Anime Modal -->
@@ -250,16 +262,6 @@
             </div>
         </div>
     </div>
-
-    <script src="main.js">
-        
-    </script> 
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script> 
-   
+  <script src="main.js"></script>
 </body>
 </html>
-
-
-
-
-
